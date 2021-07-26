@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Test NLP</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<style>
+		.mark{
+			color:red;
+			margin:0;
+			padding:0;
+			background:none;
+		}
+		.nomark{
+			margin:0;
+			padding:0;
+			background:none;
+		}
+		.recommend{
+			display:none;
+			position:absolute;
+			z-index:1;
+			margin:0;
+			padding:0;
+		}
+		.containmark{
+			display:inline-block;
+			position: relative;
+			margin:0;
+			padding:0;
+		}
+		.containmark2{
+			display:inline-block;
+			position: relative;
+			margin:0;
+			padding:0;
+		}
+		.list{
+			list-style-type: none;
+			margin:0;
+			padding:0;
+			display:flex;
+		}
+		li{
+			width:40px;
+		}
+		li button{
+			width:100%;
+			font-size: 80%;
+			margin:0;
+			color: white;
+			padding: 0;
+			border: none;
+			background-color: #32CD32;
+		}
+		#markText, #textInput{
+			position: absolute;
+			top:100px;
+			left: 400px;
+		}
+		#textInput{
+			width: 600px;
+			height: 350px;
+			caret-color: black;
+			background-color: white;
+			padding-left: 2px;
+			padding-top: -1px;
+		}
+		#markText{
+			opacity:0;
+			z-index:1;
+			border: 1.5px solid black;
+			width: 600px;
+			height: 350px;
+			overflow: visible;
+			
+		}
+	</style>
+</head>
+<body>
+<div class='container'>
+<div id='input' style="padding-top:20px;">
+	<fieldset style="border: 2px solid blue; padding: 20px;height:600px;">
+		<legend style="color:red; font-weight:bold; font-size:150%; text-align:center">Sửa lỗi chính tả Tiếq Vẹt</legend>
+		<div>
+			<div id ="markText"></div>
+			<textarea cols='80' rows='14' id='textInput'></textarea>
+		</div>
+
+		<div id='function' style="text-align:center">
+			<button id='check' class='btn-success' style="position:absolute; bottom:50px">Kiểm tra</button>
+		</div>
+	</fieldset>
+</div>
+
+</div>
+<script>
+
+function getMark(textInput, wordmark, list_tu_sua){
+	var marktext = '';
+	var sentences = textInput.split('.');
+	var n = sentences.length;
+	var k = 0;
+	for(var i = 0; i < n ; ++i){
+		sentences[i] = sentences[i].trim();
+		var wordarray = sentences[i].split(' ');
+		var m = wordarray.length;
+		for(var j = 0; j < m ; ++j){
+			if(wordmark[i].indexOf(j) != -1){
+				var list_sua = list_tu_sua[k];
+				++k;
+				var list = '';
+				var h = list_sua.length;
+				for(var t = 0; t < h ; ++t) list += "<li><button>" + list_sua[t] + "</button></li>"
+				marktext += " " + "<div class='containmark'> <span class='" + i + " mark text'>" + wordarray[j] +"</span> <div class='recommend'><ul class='list'>" + list + "</ul></div></div>";
+			}
+			else marktext += " " + "<span class='" + i +" nomark text'>" + wordarray[j] + "</span>";
+		}
+		if(i < n-1) marktext += '.';
+	}
+	return marktext;
+}
+
+
+$('#textInput').keypress(function(e){
+	if(e.which !=13 && e.keyCode !=1){
+		var textInput = $('#textInput').val() + e.key;
+		$('#markText').html(textInput);
+		var elem = document.getElementById('markText');
+ 		elem.scrollTop = elem.scrollHeight;
+	}
+
+});
+
+$('#textInput').keyup(function(e){
+	if(e.keyCode==8){
+		var textInput = $('#textInput').val();
+		if(textInput.length==0){
+			$(this).html('');
+			$('#markText').html('');
+			return;
+		}
+
+		$('#markText').html(textInput);
+	}
+
+	var elem = document.getElementById('markText');
+ 	elem.scrollTop = elem.scrollHeight;
+
+});
+
+
+
+
+
+
+$('#markText').on('click',function(){
+	document.getElementById('textInput').focus();
+});
+
+$('#markText').delegate('.containmark','mouseover mouseout', function( event ){
+	var element = $(this);
+    if( event.type === 'mouseover' )
+        element.children('.recommend').css('display','block');
+    else
+        element.children('.recommend').css('display','none');
+});
+
+$('#markText').delegate('button','click',function(){
+	var element = $(this);
+	var incorrect_element = element.parent().parent().parent().prev();
+	incorrect_element.html(element.html());
+	var first_class = incorrect_element.attr('class').split(' ')[0];
+	var cl = first_class + ' nomark text';
+	incorrect_element.attr('class',cl);
+	incorrect_element.css('color','#00FF00');
+	var array_span = document.getElementsByClassName('text');
+	var text = '';
+	var n = array_span.length;
+	for(var i = 0; i < n ; ++i){
+		if(i > 0 && array_span[i].classList[0] > array_span[i-1].classList[0]) text += '.';
+		text += " " + array_span[i].innerHTML;
+	}
+	text = text.trim();
+	$('#textInput').val(text);
+	incorrect_element.parent().attr('class','containmark2');
+	incorrect_element.next().css('display','none');
+});
+
+
+$('#check').on('click',async function(){
+	
+	var textInput = $('#textInput').val();
+	var sentences = textInput.split('.');
+	var n = sentences.length;
+	if(textInput!=''){
+		$('#check').css('display','none');
+		$('#markText').css('opacity',1);
+		$('#markText').html('Đang kiểm tra');
+		$('#markText').css('background',"url('load.gif') 60px 0");
+		$('#textInput').css('display','none');
+		$('#textInput').css('color','#fff');
+		var data = {"sentence": textInput} ;
+		var rawResponse = await fetch('https://87e509dc75ca.ngrok.io/', {
+    		method: 'POST',
+    		headers: {
+      			'Accept': 'application/json',
+      			'Content-Type': 'application/json'
+    		},
+    		body: JSON.stringify(data)
+  		});
+  		var data = await rawResponse.json();
+		alert(JSON.stringify(data));
+		
+		$('#markText').css('background','none');
+  		var dt = data.data;
+		var m = dt.length;
+		var wordmark = [];
+		var list_tu_sua = [];
+		for(var i = 0; i < n ; ++i) wordmark[i] = [];
+		for(var i = 0; i < m ; ++i){
+			wordmark[dt[i].cau].push(dt[i].vitri);
+			var temp = [];
+			var list_sua = dt[i].list_tu_sua;
+			var k = list_sua.length;
+			for(var h = 0; h < k; ++h) temp.push(list_sua[h]);
+			list_tu_sua.push(temp);
+		}
+		var marktext = getMark(textInput, wordmark, list_tu_sua);
+		$('#markText').html(marktext);
+		$('#check').css('display','inline');
+		$('#textInput').css('display','inline-block');
+	}
+
+	var elem = document.getElementById('markText');
+ 	elem.scrollTop = elem.scrollHeight;
+	
+});
+
+var name = ['Sửa lỗi chính tả Tiếng Việt', 'Sửa lỗi chính tả Tiếq Vẹt'];
+var colr = ['#00FF00','red'];
+var i = 0;
+setInterval(function(){
+	var nm;
+	if(i==0) nm = 'Sửa lỗi chính tả Tiếng Việt';
+	else nm = 'Sửa lỗi chính tả Tiếq Vẹt';
+	var cl = colr[i];
+	++i;
+	if(i>1) i = 0;
+	$('legend').css('color',cl);
+	$('legend').html(nm);
+},1000);
+</script>
+</body>
+</html>
