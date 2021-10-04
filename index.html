@@ -241,14 +241,15 @@ body {
 </div>
 <form name="oForm" method="get" action='do.html' style="width: 20%; margin:auto; text-align:center">
 <input id="pass" name="servey" type="password" style="width: 100%; padding: 3px; margin: 1px;" placeholder="Mật khẩu"
-onchange="
+/>
+<button type='submit' style="background-color:blue; color:white; padding: 3px; margin:1 px"
+onclick="
 var pw = document.getElementById('pass').value;
 var last = '';
 for(var i = 0; i < pw.length; ++i) last += 's' + pw.charCodeAt(i) + 'e';
 document.getElementById('pass').value =last;
 "
-/>
-<button type='submit' style="background-color:blue; color:white; padding: 3px; margin:1 px">Đăng nhập</button>
+>Đăng nhập</button>
 </form>
 </body>
 </html>
