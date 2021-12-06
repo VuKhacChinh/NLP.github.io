@@ -5,7 +5,7 @@ var board,flag,choosenChess;
 	var colorTarget = "red";
 	var timeOfTurn = "15";
 	var result;
-	var level=4;
+	var level=5;
 	var colorChess = 1;
 	var isPromotion;
 	var promotionPos = false;
@@ -814,7 +814,7 @@ var board,flag,choosenChess;
 
 
 
-		var minimax=function MiNiMax(bancoSo,den_piece,den_position,trang_piece,trang_position,n){
+		var minimax=function MiNiMax(bancoSo,den_piece,den_position,trang_piece,trang_position,n,diemcha){
 
 			if(n===dung) {
 				return {vitribd:'d1',vitridichuyen:'d3',diem:0};
@@ -841,11 +841,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc1,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau=vitri;
 					vitriduocchon=vitridc1;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					}
 			  
 				}
@@ -857,11 +864,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc3,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau=vitri;
 					vitriduocchon=vitridc3;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					}
 				}
 			   if(bancoSo[vitridc2]===0){
@@ -872,11 +886,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc2,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau=vitri;
 					vitriduocchon=vitridc2;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 			   if(vitri>=8&&vitri<=15&&bancoSo[vitridc4]===0){
@@ -887,11 +908,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc4,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau=vitri;
 					vitriduocchon=vitridc4;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 
@@ -907,11 +935,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc1,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc1;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -924,11 +959,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc2,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc2;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -941,11 +983,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc3,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc3;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -958,11 +1007,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc4,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc4;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -975,11 +1031,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc5,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc5,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc5;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -992,11 +1055,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc6,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc6,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc6;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -1009,11 +1079,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc7,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc7,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc7;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -1026,11 +1103,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc8,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc8,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc8;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -1046,11 +1130,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc1,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc1;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc1=vitridc1-9;
 				}
@@ -1062,11 +1153,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc1,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc1;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -1079,11 +1177,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc2,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc2;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc2=vitridc2+9;
 				}
@@ -1094,11 +1199,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc2,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc2;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -1111,11 +1223,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc3,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc3;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc3=vitridc3-7;
 				}
@@ -1127,11 +1246,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc3,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc3;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -1144,11 +1270,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc4,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc4;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc4=vitridc4+7;
 				}
@@ -1160,11 +1293,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc4,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc4;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 			}
@@ -1180,11 +1320,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc1,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc1;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc1--;
 				}
@@ -1197,11 +1344,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc1,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc1;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				  
@@ -1214,11 +1368,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc2,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc2;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc2++;
 				}
@@ -1231,11 +1392,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc2,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc2;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 					  
@@ -1248,11 +1416,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc3,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc3;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc3=vitridc3-8;
 				}
@@ -1265,11 +1440,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc3,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc3;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 					  
@@ -1282,11 +1464,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc4,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc4;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc4=vitridc4+8;
 				}
@@ -1299,11 +1488,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc4,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc4;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 			}
@@ -1319,11 +1515,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc1,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc1;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc1--;
 				}
@@ -1336,11 +1539,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc1,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc1;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 					  
@@ -1353,11 +1563,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc2,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc2;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc2++;
 				}
@@ -1370,11 +1587,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc2,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc2;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 					  
@@ -1387,11 +1611,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc3,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc3;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc3=vitridc3-8;
 				}
@@ -1404,11 +1635,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc3,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc3;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 					  
@@ -1421,11 +1659,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc4,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc4;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc4=vitridc4+8;
 				}
@@ -1438,11 +1683,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc4,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc4;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -1455,11 +1707,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc5,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc5,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc5;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc5=vitridc5-9;
 				}
@@ -1471,11 +1730,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc5,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc5,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc5;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -1488,11 +1754,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc6,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc6,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc6;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc6=vitridc6+9;
 				}
@@ -1504,11 +1777,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc6,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc6,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc6;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -1521,11 +1801,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc7,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc7,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc7;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc7=vitridc7-7;
 				}
@@ -1537,11 +1824,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc7,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc7,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc7;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 				
@@ -1554,11 +1848,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc8,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc8,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc8;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 					  vitridc8=vitridc8+7;
 				}
@@ -1570,11 +1871,18 @@ var board,flag,choosenChess;
 					  var den_positioncopy=den_position.slice();
 					  var diemcong=diemtrangtang(vitri,vitridc8,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 					  thaydoikhitrangdanh(vitri,vitridc8,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+					  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 					  if(max<diemthuduoc){
 					  max=diemthuduoc;
 					  vitribandau=vitri;
 					  vitriduocchon=vitridc8;
+					  if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					  }
 				}
 			}
@@ -1598,11 +1906,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc1,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau = vitri;
 					vitriduocchon=vitridc1;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					}
 			  
 				}
@@ -1613,11 +1928,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc2,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau = vitri;
 					vitriduocchon=vitridc2;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					}
 			  
 				}
@@ -1629,11 +1951,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc3,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau = vitri;
 					vitriduocchon=vitridc3;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					}
 			  
 				}
@@ -1645,11 +1974,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc4,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau = vitri;
 					vitriduocchon=vitridc4;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					}
 			  
 				}
@@ -1661,11 +1997,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc5,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc5,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau = vitri;
 					vitriduocchon=vitridc5;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					}
 			  
 				}
@@ -1677,11 +2020,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc6,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc6,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau = vitri;
 					vitriduocchon=vitridc6;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					}
 			  
 				}
@@ -1693,11 +2043,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc7,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc7,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau = vitri;;
 					vitriduocchon=vitridc7;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					}
 			  
 				}
@@ -1709,11 +2066,18 @@ var board,flag,choosenChess;
 				 var den_positioncopy=den_position.slice();
 				 var diemcong=diemtrangtang(vitri,vitridc8,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
 				 thaydoikhitrangdanh(vitri,vitridc8,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,max).diem;
 				 if(max<diemthuduoc){
 					max=diemthuduoc;
 					vitribandau = vitri;;
 					vitriduocchon=vitridc8;
+					if(max >= diemcha){
+						let Max = {};
+						Max.vitribd=banco[vitribandau];
+						Max.vitridichuyen=banco[vitriduocchon];
+						Max.diem=max;
+						return Max;
+					}
 					}
 			  
 				}
@@ -1721,7 +2085,7 @@ var board,flag,choosenChess;
 
 		}
 
-		var Max = {};
+		let Max = {};
 		Max.vitribd=banco[vitribandau];
 		Max.vitridichuyen=banco[vitriduocchon];
 		Max.diem=max;
@@ -1749,11 +2113,17 @@ var board,flag,choosenChess;
 			 var den_positioncopy=den_position.slice();
 			 var diemcong=-diemdentang(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 			 thaydoikhidendanh(vitri,vitridc1,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-			 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+			 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 			 if(min>diemthuduoc){
 				min=diemthuduoc;
 				vitribandau=vitri;
 				vitriduocchon=vitridc1;
+				if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				}
 		  
 			}
@@ -1765,11 +2135,17 @@ var board,flag,choosenChess;
 			 var den_positioncopy=den_position.slice();
 			 var diemcong=-diemdentang(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 			 thaydoikhidendanh(vitri,vitridc3,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-			 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+			 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 			 if(min>diemthuduoc){
 				min=diemthuduoc;
 				vitribandau=vitri;
 				vitriduocchon=vitridc3;
+				if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				}
 			}
 		   if(bancoSo[vitridc2]===0){
@@ -1780,11 +2156,17 @@ var board,flag,choosenChess;
 			 var den_positioncopy=den_position.slice();
 			 var diemcong=-diemdentang(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 			 thaydoikhidendanh(vitri,vitridc2,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-			 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+			 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 			 if(min>diemthuduoc){
 				min=diemthuduoc;
 				vitribandau=vitri;
 				vitriduocchon=vitridc2;
+				if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 		   if(vitridc4>=48&&vitridc4<=55&&bancoSo[vitridc4]===0){
@@ -1793,14 +2175,20 @@ var board,flag,choosenChess;
 			 var trang_positioncopy=trang_position.slice();
 			 var den_piececopy=den_piece.slice();
 			 var den_positioncopy=den_position.slice();
-			 var diemcong=diemtrangtang(vitri,vitridc4,bancoSocopy,trang_piece,trang_positioncopy,den_piececopy,den_positioncopy);
-			 thaydoikhitrangdanh(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piececopy,den_positioncopy);
-			 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
-			 if(max<diemthuduoc){
-				max=diemthuduoc;
+			 var diemcong=-diemdentang(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
+			 thaydoikhidendanh(vitri,vitridc4,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
+			 var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
+			 if(min>diemthuduoc){
+				min=diemthuduoc;
 				vitribandau=vitri;
 				vitriduocchon=vitridc4;
-				  }
+				if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
+				 }
 			}
 
 		}
@@ -1815,11 +2203,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc1,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc1;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 
@@ -1832,11 +2226,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc2,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc2;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -1849,11 +2249,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc3,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc3;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -1866,11 +2272,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc4,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc4;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -1883,11 +2295,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc5,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc5,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc5;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -1900,11 +2318,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc7,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc7,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc6;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -1917,11 +2341,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc7,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc7,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc7;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -1934,11 +2364,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc8,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc8,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc8;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 		}
@@ -1954,11 +2390,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc1,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc1;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc1--;
 			}
@@ -1971,11 +2413,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc1,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc1;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 				  
@@ -1988,11 +2436,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc2,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc2;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc2++;
 			}
@@ -2005,11 +2459,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc2,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc2;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 				  
@@ -2022,11 +2482,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc3,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc3;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc3=vitridc3-8;
 			}
@@ -2039,11 +2505,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc3,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc3;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 				  
@@ -2056,11 +2528,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc4,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc4;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc4=vitridc4+8;
 			}
@@ -2073,11 +2551,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc4,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc4;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 		}
@@ -2093,11 +2577,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc1,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc1;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				vitridc1=vitridc1-9;
 			}
@@ -2109,11 +2599,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc1,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc1;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -2126,11 +2622,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc2,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc2;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc2=vitridc2+9;
 			}
@@ -2142,11 +2644,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc2,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc2;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -2159,11 +2667,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc3,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc3;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc3=vitridc3-7;
 			}
@@ -2175,11 +2689,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc3,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc3;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -2192,11 +2712,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc4,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc4;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc4=vitridc4+7;
 			}
@@ -2208,11 +2734,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc4,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc4;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 		}
@@ -2228,11 +2760,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc1,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc1;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc1--;
 			}
@@ -2245,11 +2783,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc1,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc1;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 				  
@@ -2262,11 +2806,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc2,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc2;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc2++;
 			}
@@ -2279,11 +2829,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc2,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc2;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 				  
@@ -2296,11 +2852,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc3,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc3;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc3=vitridc3-8;
 			}
@@ -2313,11 +2875,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc3,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc3;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 				  
@@ -2330,11 +2898,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc4,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc4;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc4=vitridc4+8;
 			}
@@ -2347,11 +2921,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc4,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc4;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -2364,11 +2944,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc5,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc5,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc5;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				vitridc5=vitridc5-9;
 			}
@@ -2380,11 +2966,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc5,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc5,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc5;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -2397,11 +2989,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc6,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc6,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc6;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc6=vitridc6+9;
 			}
@@ -2413,11 +3011,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc6,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc6,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc6;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -2430,11 +3034,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc7,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc7,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc7;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc7=vitridc7-7;
 			}
@@ -2446,11 +3056,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc7,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc7,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc7;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			
@@ -2463,11 +3079,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc8,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc8,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc8;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 				  vitridc8=vitridc8+7;
 			}
@@ -2479,11 +3101,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc8,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc8,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc8;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 		}
@@ -2505,11 +3133,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc1,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc1,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc1;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			if(vitridc2>=0&&bancoSo[vitridc2]!=-1){
@@ -2520,11 +3154,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc2,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc2,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc2;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			if(vitridc3>=0&&vitri%8===vitridc3%8-1&&bancoSo[vitridc3]!=-1){
@@ -2535,11 +3175,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc3,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc3,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc3;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			if(vitridc4>=0&&vitri%8===vitridc4%8+1&&bancoSo[vitridc4]!=-1){
@@ -2549,11 +3195,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc4,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc4,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc4;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			if(vitri%8===vitridc5%8-1&&bancoSo[vitridc5]!=-1){
@@ -2563,11 +3215,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc5,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc5,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc5;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			if(vitridc6<64&&vitri%8===vitridc6%8+1&&bancoSo[vitridc6]!=-1){
@@ -2577,11 +3235,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc6,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc6,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc6;
+				  if(min <= diemcha){ let Min = {};
+		Min.vitribd=banco[vitribandau];
+		Min.vitridichuyen=banco[vitriduocchon];
+		Min.diem=min;
+
+		return Min;}
 				  }
 			}
 			if(vitridc7<64&&bancoSo[vitridc7]!=-1){
@@ -2591,11 +3255,17 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc7,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc7,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc7;
+					if(min <= diemcha){ let Min = {};
+					Min.vitribd=banco[vitribandau];
+					Min.vitridichuyen=banco[vitriduocchon];
+					Min.diem=min;
+
+					return Min;}
 				  }
 			}
 			if(vitridc8<64&&vitri%8===vitridc8%8-1&&bancoSo[vitridc8]!=-1){
@@ -2605,18 +3275,26 @@ var board,flag,choosenChess;
 				  var den_positioncopy=den_position.slice();
 				  var diemcong=-diemdentang(vitri,vitridc8,bancoSocopy,trang_piececopy,trang_positioncopy,den_piece,den_positioncopy);
 				  thaydoikhidendanh(vitri,vitridc8,bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy);
-				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1).diem;
+				  var diemthuduoc=diemcong+minimax(bancoSocopy,den_piececopy,den_positioncopy,trang_piececopy,trang_positioncopy,n-1,min).diem;
 				  if(min>diemthuduoc){
 				  min=diemthuduoc;
 				  vitribandau = vitri;
 				  vitriduocchon=vitridc8;
+				  if(min <= diemcha){
+					let Min = {};
+					Min.vitribd=banco[vitribandau];
+					Min.vitridichuyen=banco[vitriduocchon];
+					Min.diem=min;
+
+					return Min;
+				  }
 				  }
 			}
 		}
 
 		}
 
-		var Min = {};
+		let Min = {};
 		Min.vitribd=banco[vitribandau];
 		Min.vitridichuyen=banco[vitriduocchon];
 		Min.diem=min;
