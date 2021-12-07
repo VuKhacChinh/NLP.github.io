@@ -5,7 +5,7 @@ var board,flag,choosenChess;
 	var colorTarget = "red";
 	var timeOfTurn = "15";
 	var result;
-	var level=5;
+	var level=4;
 	var colorChess = 1;
 	var isPromotion;
 	var promotionPos = false;
